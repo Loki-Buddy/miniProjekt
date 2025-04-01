@@ -1,0 +1,40 @@
+Name: To-Do-Manager MasterWork 1.0
+
+To-Do-App mit Sprachsteuerung
+Funktionen:
+    Aufgaben hinzufügen per Text & Sprache (Speech Recognition API)
+    Aufgaben als erledigt markieren
+    Drag & Drop zur Neuordnung
+    Lokale Speicherung mit LocalStorage/Cookies oder Datenbank
+
+Technologien:
+    Frontend: HTML, CSS, JavaScript
+    Backend: Express.js (nur wenn ihr Daten persistent speichern wollt, z. B. in einer MongoDB oder SQLite)
+
+Extras:
+    Sprachbasierte Steuerung ("Lösche letzte Aufgabe") *Wenn noch Zeit ist*
+    Dark/Light Mode
+
+Nächste Schritte:
+
+Grundlegende Planung
+
+Welche Features sind wirklich nötig/möglich in 3 Tagen?
+Soll die App Daten nur lokal speichern oder auch in einer Datenbank?
+
+Aufgabenteilung
+    Frontend (UI, Drag & Drop, Styles)
+    Backend (Express API, evtl. Datenbank)
+
+Tech-Stack klären
+    Frontend: HTML, CSS, JS
+    Backend: Express.js
+    Speicherung: LocalStorage oder Datenbank?
+
+
+Kurze Skizze:
+    Speichern: Aufgaben werden in einer tasks.json gespeichert
+    Laden: Beim Start der App lädt das Backend die JSON-Datei
+
+Aktualisieren:
+    Neue Aufgaben werden in die JSON-Datei geschrieben
