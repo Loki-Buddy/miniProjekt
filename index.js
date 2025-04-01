@@ -7,12 +7,12 @@ app.use(express.json());
 app.use(cors());
 
 function readFile(){
-    const data = fs.readFileSync("tiere.json", "utf-8");
+    const data = fs.readFileSync("test.json", "utf-8");
     return JSON.parse(data);
 }
 
 function writeFile(data){
-    fs.writeFileSync("tiere.json", JSON.stringify(data, null, 2)); // JSON.stringify wandelt ein Javascript Objekt in eine JSON Format um
+    fs.writeFileSync("test.json", JSON.stringify(data, null, 2)); // JSON.stringify wandelt ein Javascript Objekt in eine JSON Format um
 }
 
 app.get("/listlog", (req,res) =>{
@@ -21,6 +21,8 @@ app.get("/listlog", (req,res) =>{
 
 });
 
+
+
 app.listen(5000, () => {
-    console.log("Server is running on port 3000");
+    console.log("Server is running on port 5000");
 });
