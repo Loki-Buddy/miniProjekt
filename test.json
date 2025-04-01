@@ -1,0 +1,27 @@
+[
+    {
+        "id": 10001,
+        "listName": "Test1",
+        "dateOfCreate": "2025-04-01T15:14:00Z"
+    },
+    {
+        "id": 10002,
+        "listName": "Test2",
+        "dateOfCreate": "2025-04-01T15:16:00Z"
+    },
+    {
+        "id": 10003,
+        "listName": "Test3",
+        "dateOfCreate": "2025-04-01T15:18:00Z"
+    },
+    {
+        "id": 10004,
+        "listName": "Test4",
+        "dateOfCreate": "2025-04-01T15:20:00Z"
+    },
+    {
+        "id": 10005,
+        "listName": "Test5",
+        "dateOfCreate": "2025-04-01T15:21:00Z"
+    }
+]
