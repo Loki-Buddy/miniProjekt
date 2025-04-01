@@ -38,12 +38,10 @@ modeDark.addEventListener("click", () => {
 //});
 
 //function createTask() {
-//    const userEmailTi = document.getElementById("emailTI").value;
-//    const userPasswordTi = document.getElementById("passwordTI").value;
-//    const userRepeatPasswordTi = document.getElementById("repeatPasswordTI").value;
-//    const userFirstName = document.getElementById("firstName").value;
-//    const userFamilyName = document.getElementById("familyName").value;
-//    if (!userEmailTi || !userPasswordTi || !userRepeatPasswordTi || !userFirstName || !userFamilyName) {
+//    const activityTi = document.getElementById("Activity").value;
+//    const creationDateTi = document.getElementById("Date of creation").value;
+//    const DateTi = document.getElementById("repeatPasswordTI").value;
+//    if (!activityTi || !creationDateTi || !DateTi) {
 //        alert("Bitte fülle alle Felder aus!");
 //        return;
 //    }
