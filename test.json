@@ -1,55 +1,37 @@
 [
-    {
-        "id": 10001,
-        "listName": "Test1",
-        "dateOfCreate": "2025-04-01T15:14:00Z",
-        "tasks": [
-            {
-                "taskName": "Test1",
-                "dateOfCreate": "2025-04-01T15:14:00Z",
-                "checked": false
-            },
-            {
-                "taskName": "Test2",
-                "dateOfCreate": "2025-04-01T15:16:00Z",
-                "checked": false
-            }
-        ]
-    },
-    {
-        "id": 10002,
-        "listName": "Test2",
-        "dateOfCreate": "2025-04-01T15:16:00Z",
-        "tasks": [
-            {
-                "taskName": "Test1",
-                "dateOfCreate": "2025-04-01T15:14:00Z",
-                "checked": false
-            },
-            {
-                "taskName": "Test2",
-                "dateOfCreate": "2025-04-01T15:16:00Z",
-                "checked": false
-
-            }
-        ]
-    },
-    {
-        "id": 10003,
-        "listName": "Test3",
-        "dateOfCreate": "2025-04-01T15:18:00Z",
-        "tasks": []
-    },
-    {
-        "id": 10004,
-        "listName": "Test4",
-        "dateOfCreate": "2025-04-01T15:20:00Z",
-        "tasks": []
-    },
-    {
-        "id": 10005,
-        "listName": "Test5",
-        "dateOfCreate": "2025-04-01T15:21:00Z",
-        "tasks": []
-    }
+  {
+    "id": 10001,
+    "listName": "Test1",
+    "dateOfCreate": "2025-04-01T15:14:00Z",
+    "tasks": [
+      {
+        "taskName": "Test1",
+        "checked": false
+      },
+      {
+        "taskName": "Test2",
+        "checked": false
+      }
+    ]
+  },
+  {
+    "id": 10002,
+    "listName": "Test2",
+    "dateOfCreate": "2025-04-01T15:16:00Z",
+    "tasks": [
+      {
+        "taskName": "Test1",
+        "checked": false
+      },
+      {
+        "taskName": "Test2",
+        "checked": false
+      }
+    ]
+  },
+  {
+    "id": 10003,
+    "dateOfCreate": "2025-04-01T14:53:50.226Z",
+    "tasks": []
+  }
 ]
