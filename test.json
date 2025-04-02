@@ -11,6 +11,11 @@
       {
         "taskName": "Test2",
         "checked": false
+      },
+      {
+        "taskName": "PostMethodefürTask",
+        "dateOfCreate": "2025-04-02T07:38:27.502Z",
+        "checked": false
       }
     ]
   },
@@ -32,6 +37,12 @@
   {
     "id": 10003,
     "dateOfCreate": "2025-04-01T14:53:50.226Z",
+    "tasks": []
+  },
+  {
+    "id": 10004,
+    "listName": "TestPostRoute",
+    "dateOfCreate": "2025-04-02T07:11:25.927Z",
     "tasks": []
   }
 ]

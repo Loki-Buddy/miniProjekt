@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const {format, utcToZonedTime} = require("date-fns-tz");
 const fs = require("fs");
 const app = express();
 
@@ -57,9 +58,31 @@ app.post("/listlog/:id/task", (req, res) => {
     }
 
     foundedList.tasks.push(newTask);
+    writeFile(listlog);	
     res.json(newTask);
 
 });
+
+app.get("/search", (req, res) => {
+    const listlog = readFile();
+    const listName = req.query;
+    if (!listName) {
+        return res.status(400).send("List name is required");
+    }
+    const filteredList = listlog.filter(tdList => tdList.listName.toLowerCase().includes(listName.toLowerCase()));
+    res.json(filteredList);
+});
+
+/* app.get("/:listName/search", (req, res) => {
+    const listlog = readFile();
+    const listName = req.params.listName;
+    const taskName = req.query.taskName;
+    if (!listName) {
+        return res.status(400).send("List name is required");
+    }
+    const filteredList = listlog.filter(tdList => tdList.listName.toLowerCase().includes(listName.toLowerCase()));
+    const filteredTask = filteredList.filter(tdList => tdList.tasks.filter(task => task.taskName.toLowerCase().includes(taskName.toLowerCase())));
+}); */
 
 app.listen(5000, () => {
     console.log("Server is running on port 5000");
