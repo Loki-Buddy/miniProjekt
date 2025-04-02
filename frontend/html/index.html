@@ -10,42 +10,44 @@
 </head>
 
 <body>
-    <h1>TO-Do-M-M Work 1.0</h1>
+    <!--<h1>TO-Do-M-M Work 1.0</h1>-->
 
-    <h1>TO-DO liste</h1>
-
-    <input type="text" id="Activity" placeholder="Activity...">
-    <!--<input type="text" id="kategorie" placeholder="Kategorie...">-->
-    <select id="category">
-        <option value="" id="defaultOption">Select</option>
-        <option value="Shopping">Shopping</option>
-        <option value="Administration">Admi 🏢</option>
-        <option value="Gym">Gym 🏋️‍♂️ </option>
-        <option value="Home">Clean up & Co 🧼 </option>
-        <option value="Family">Family 👨‍👩‍👧‍👦 </option>
-        <option value="Birthdays"> Buy birthday presents </option>
-        <option value="Venture"> Venture</option>
-        <option value="Tools"> Tools</option>
-        <option value="Auto">Auto </option>
-        <option value="Bills">Bills </option>
+    <h2>TO-DO liste</h2>
 
 
+    <!-- Dropdown for selecting option -->
+
+    <input type="text" id="user input" placeholder="user input">
+    <select id="selectOption" placeholder="select option">
+
+        <option value="listInsert">Enter list</option>
+        <option value="searchList">Search list</option>
+        <option value="taskInsert">Enter task </option>
+        <option value="taskSearch">Search task </option>
 
     </select>
 
-    <input id="Date of creation" placeholder="when created">
-    <input id="Date" placeholder="Until when ready">
 
 
+    <h3> Tasks: </h3>
+    <ul id="taskList"></ul>
+    <select id="selectOption" placeholder="select an option">
+        <option value="Shopping">Shopping 🛒</option>
+        <option value="Gym">Gym 🏋️‍♂️</option>
+        <option value="Work">Work 💼</option>
+        <option value="Family">Family 👨‍👩‍👧‍👦</option>
+        <option value="Home">Home 🏡</option>
+        <option value="Birthdays">Birthdays 🎂</option>
+        <option value="Venture">Venture 🚀</option>
+        <option value="Tools">Tools 🔧</option>
+        <option value="Auto">Auto 🚗</option>
+        <option value="Bills">Bills 💰</option>
+    </select>
+    <br>
+    <br>
+    <button id="addButton">Add</button>
     <button id="deleteButton">delete input </button>
     <button id="clearButton">delete list </button>
-    <button id="addButton">Add</button>
-    <div>
-        <ul id="list"></ul>
-    </div>
-
-
-
 </body>
 
 </html>
