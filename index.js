@@ -106,15 +106,12 @@ app.post("/createTask/:listName", (req, res) => {
     const listName = req.params.listName;
     const taskName = req.body.taskName;
 
-    const foundedList = listlog.find(tdList => tdList.listName === listName);
-    const foundedTask = foundedList.tasks.find(task => task.taskName == taskName);
+    const foundedList = listlog.find(tdList => tdList.listName.toLowerCase() === listName.toLowerCase());
+    const foundedTask = foundedList.tasks.find(task => task.taskName.toLowerCase() === taskName.toLowerCase());
     
     // Wenn keine Liste existiert
     if(listlog.length === 0)
         return res.status(400).send("Bitte erst eine Liste anlegen!");
-    
-    if(!foundedList)
-        return res.status(400).send("Diese Liste existiert nicht!");
 
     if (!foundedTask) {
         const newTask = {
