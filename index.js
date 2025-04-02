@@ -1,89 +1,173 @@
 const express = require("express");
 const cors = require("cors");
-const {format, utcToZonedTime} = require("date-fns-tz");
 const fs = require("fs");
-const app = express();
 
+const { toZonedTime, format } = require("date-fns-tz");
+const timeZone = "Europe/Berlin";
+const now = new Date();
+const zonedDate = toZonedTime(now, timeZone);
+const formattedDate = format(zonedDate, "yyyy-MM-dd'T'HH:mm:ss'Z'", timeZone);
+
+const app = express();
 app.use(express.json());
 app.use(cors());
 
-function readFile(){
-    const data = fs.readFileSync("test.json", "utf-8");
+/**
+ * Liest die Datei "listlog.json" und gibt den Inhalt als
+ * Javascript-Objekt zur ck.
+ *
+ * @return {Object} Der Inhalt der Datei "listlog.json" als
+ *   Javascript-Objekt.
+ */
+function readFile() {
+    const data = fs.readFileSync("listlog.json", "utf-8");
     return JSON.parse(data);
 }
 
-function writeFile(data){
-    fs.writeFileSync("test.json", JSON.stringify(data, null, 2)); // JSON.stringify wandelt ein Javascript Objekt in eine JSON Format um
+/**
+ * Schreibt die Datei "listlog.json" mit dem gegebenen Javascript-Objekt.
+ *
+ * @param {Object} data Das Javascript-Objekt, das in die Datei "listlog.json"
+ *   geschrieben werden soll.
+ * 
+ * JSON.stringify wandelt ein Javascript Objekt in eine JSON Format um
+ */
+function writeFile(data) {
+    fs.writeFileSync("listlog.json", JSON.stringify(data, null, 2));
 }
 
-app.get("/listlog", (req,res) =>{
+// Einfache rückgabe der Datei "listlog.json" im Body
+app.get("/listlog", (req, res) => {
     const listlog = readFile();
     res.json(listlog);
 });
 
-app.get("/listlog/:id", (req, res) => {
+// Nach Listen suchen
+app.get("/list/search", (req, res) => {
     const listlog = readFile();
-    const id = parseInt(req.params.id);
-    const tdList = listlog.find((task) => task.id === id);
-    if(!tdList){
-        return res.status(404).send("Task not found");
-    }
-    res.json(tdList);
-});
-
-app.post("/listlog", (req, res) => {
-    const listlog = readFile();
-    const {listName} = req.body;
-    const newTdList = {
-        id: listlog.length > 0 ? Math.max(...listlog.map((tdList) => tdList.id)) + 1 : 10001,
-        listName,
-        dateOfCreate: new Date().toISOString(),
-        tasks: []
-    };
-    listlog.push(newTdList);
-    writeFile(listlog);
-    res.json(newTdList);
-});
-
-app.post("/listlog/:id/task", (req, res) => {
-    const listlog = readFile();
-    const id = parseInt(req.params.id);
-    const {taskName} = req.body;
-
-    const foundedList = listlog.find(tdList => tdList.id === id);
-    const newTask = {
-        taskName,
-        dateOfCreate: new Date().toISOString(),
-        checked: false
-    }
-
-    foundedList.tasks.push(newTask);
-    writeFile(listlog);	
-    res.json(newTask);
-
-});
-
-app.get("/search", (req, res) => {
-    const listlog = readFile();
-    const listName = req.query;
+    const listName = req.query.listName;
     if (!listName) {
-        return res.status(400).send("List name is required");
+        return res.status(400).send("Bitte geben Sie eine Liste an!");
     }
     const filteredList = listlog.filter(tdList => tdList.listName.toLowerCase().includes(listName.toLowerCase()));
     res.json(filteredList);
 });
 
-/* app.get("/:listName/search", (req, res) => {
+// Nach Aufgaben suchen
+app.get("/task/search", (req, res) => {
+    const listlog = readFile();
+    const taskName = req.query.taskName;
+    if (!taskName) {
+        return res.status(400).send("Bitte geben Sie einen Task an!");
+    }
+
+    const filteredTask = listlog.find(tdList => tdList.tasks.find(task => task.taskName.toLowerCase().includes(taskName.toLowerCase())));
+    res.json(filteredTask);
+});
+
+// Eine Liste hinzufügen
+app.post("/createList", (req, res) => {
+    const listlog = readFile();
+
+    const listNameConst = req.body.listName;
+    let listNameVar = req.body.listName; //
+    let listName = listNameVar;
+
+    let nameCounter = 1;
+
+    for (const tdList of listlog) {
+        if (tdList.listName.toLowerCase() === listName.toLowerCase()) {
+            listNameVar = `${listNameConst}${nameCounter++}`;
+            listName = listNameVar;
+        }
+    }
+
+    const newTdList = {
+        listName,
+        dateOfCreate: formattedDate,
+        dateOfUpdate: formattedDate,
+        tasks: [
+            /* {
+                "taskName": "Beispiel",
+                "checked": false
+            } */
+        ]
+    };
+
+    listlog.push(newTdList);
+    writeFile(listlog);
+    res.json(newTdList);
+});
+
+app.post("/createTask/:listName", (req, res) => {
+    const listlog = readFile();
+    
+    const listName = req.params.listName;
+    const taskName = req.body.taskName;
+
+    const foundedList = listlog.find(tdList => tdList.listName === listName);
+    const foundedTask = foundedList.tasks.find(task => task.taskName == taskName);
+    if (!foundedTask) {
+        const newTask = {
+            taskName,
+            checked: false
+        }
+        foundedList.tasks.push(newTask);
+        foundedList.dateOfUpdate = formattedDate;
+        writeFile(listlog);
+
+        return res.json(foundedList);
+    }
+
+    res.status(400).send("Dieser Task existiert bereits!");
+});
+
+app.put("/updateList/:listName", (req, res) => {
     const listlog = readFile();
     const listName = req.params.listName;
-    const taskName = req.query.taskName;
-    if (!listName) {
-        return res.status(400).send("List name is required");
-    }
-    const filteredList = listlog.filter(tdList => tdList.listName.toLowerCase().includes(listName.toLowerCase()));
-    const filteredTask = filteredList.filter(tdList => tdList.tasks.filter(task => task.taskName.toLowerCase().includes(taskName.toLowerCase())));
-}); */
+    const { listName: updatedListName } = req.body;
+    const foundedList = listlog.find(tdList => tdList.listName.toLowerCase() === listName.toLowerCase());
+    foundedList.listName = updatedListName;
+    foundedList.dateOfUpdate = formattedDate;
+    writeFile(listlog);
+    res.json(foundedList);
+});
+
+app.put("/updateTask/:listName/:taskName", (req, res) => {
+    const listlog = readFile();
+    const listName = req.params.listName;
+    const taskName = req.params.taskName;
+    const { taskName: updatedTaskName } = req.body;
+    const foundedList = listlog.find(tdList => tdList.listName.toLowerCase() === listName.toLowerCase());
+    const foundedTask = foundedList.tasks.find(task => task.taskName.toLowerCase() === taskName.toLowerCase());
+    foundedTask.taskName = updatedTaskName;
+    foundedList.dateOfUpdate = formattedDate;
+    writeFile(listlog);
+    res.json(foundedList);
+});
+
+app.delete("/deleteList/:listName", (req, res) => {
+    const listlog = readFile();
+    const listName = req.params.listName;
+    const filteredList = listlog.filter(tdList => tdList.listName.toLowerCase() !== listName.toLowerCase());
+    writeFile(filteredList);
+    res.json(filteredList);
+});
+
+app.delete("/deleteTask/:listName/:taskName", (req, res) => {
+    const listlog = readFile();
+    const listName = req.params.listName;
+    const taskName = req.params.taskName;
+
+    const foundedList = listlog.find(tdList => tdList.listName.toLowerCase() === listName.toLowerCase());
+    const foundedTask = foundedList.tasks.find(task => task.taskName.toLowerCase() === taskName.toLowerCase());
+    foundedList.tasks = foundedList.tasks.filter(task => task.taskName.toLowerCase() !== taskName.toLowerCase());
+    foundedList.dateOfUpdate = formattedDate;
+    writeFile(listlog);
+    res.json(foundedList);
+
+});
 
 app.listen(5000, () => {
-    console.log("Server is running on port 5000");
+    console.log("Server läuft auf Port 5000");
 });
