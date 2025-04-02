@@ -65,12 +65,12 @@ app.get("/task/search", (req, res) => {
     res.json(filteredTask);
 });
 
-// Eine Liste hinzufügen
+// Einzelne Liste anlegen
 app.post("/createList", (req, res) => {
     const listlog = readFile();
 
     const listNameConst = req.body.listName;
-    let listNameVar = req.body.listName; //
+    let listNameVar = req.body.listName;
     let listName = listNameVar;
 
     let nameCounter = 1;
@@ -99,6 +99,7 @@ app.post("/createList", (req, res) => {
     res.json(newTdList);
 });
 
+// Einzelenen Task in einer bestimmten Liste ablegen/hinzufügen
 app.post("/createTask/:listName", (req, res) => {
     const listlog = readFile();
     
@@ -107,11 +108,20 @@ app.post("/createTask/:listName", (req, res) => {
 
     const foundedList = listlog.find(tdList => tdList.listName === listName);
     const foundedTask = foundedList.tasks.find(task => task.taskName == taskName);
+    
+    // Wenn keine Liste existiert
+    if(listlog.length === 0)
+        return res.status(400).send("Bitte erst eine Liste anlegen!");
+    
+    if(!foundedList)
+        return res.status(400).send("Diese Liste existiert nicht!");
+
     if (!foundedTask) {
         const newTask = {
             taskName,
             checked: false
         }
+
         foundedList.tasks.push(newTask);
         foundedList.dateOfUpdate = formattedDate;
         writeFile(listlog);
