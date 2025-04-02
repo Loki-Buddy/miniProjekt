@@ -12,6 +12,10 @@ body * {
 
 }
 
+select:first-child {
+    color: rgba(32, 187, 50, 0.553);
+}
+
 /* Dropdown Button */
 .dropbtn {
     background-color: #04AA6D;
