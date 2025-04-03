@@ -1,0 +1,57 @@
+#modeDark {
+    visibility: hidden;
+}
+
+body {
+    color: white;
+    background-color: rgb(0, 0, 0);
+    /*display: grid;
+    flex-direction: column;*/
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+body * {
+    margin: 5px;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px;
+    color: orange;
+}
+
+input {
+    padding: 10px;
+    border-radius: 8px;
+    width: 80%;
+}
+
+button {
+    font-size: 18px;
+    padding: 10px;
+    /* color: orange; */
+    background-color: orange;
+    color: white;
+    font-weight: 700;
+    border-radius: 8px;
+
+
+    &:hover {
+        color: orange;
+        background-color: white;
+    }
+}
+
+/* Dropdown Content (Hidden by Default) */
+#selectOption {
+    /*
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    */
+    padding: 10px;
+    width: 80%;
+}
