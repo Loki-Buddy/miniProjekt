@@ -37,8 +37,13 @@
   {
     "listName": "test 124",
     "dateOfCreate": "2025-04-03T07:05:09Z",
-    "dateOfUpdate": "2025-04-03T07:05:09Z",
-    "tasks": []
+    "dateOfUpdate": "2025-04-03T08:53:47Z",
+    "tasks": [
+      {
+        "taskName": "Auto waschen",
+        "checked": false
+      }
+    ]
   },
   {
     "listName": "Noch ne Liste",
@@ -66,6 +71,18 @@
   },
   {
     "listName": "my list",
+    "dateOfCreate": "2025-04-03T08:53:47Z",
+    "dateOfUpdate": "2025-04-03T08:53:47Z",
+    "tasks": []
+  },
+  {
+    "listName": "my list1",
+    "dateOfCreate": "2025-04-03T08:53:47Z",
+    "dateOfUpdate": "2025-04-03T08:53:47Z",
+    "tasks": []
+  },
+  {
+    "listName": "my next list1",
     "dateOfCreate": "2025-04-03T08:53:47Z",
     "dateOfUpdate": "2025-04-03T08:53:47Z",
     "tasks": []

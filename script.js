@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Please enter a task!");
       return;
     }
-    const checkBox = document.createElement("userInput");
+    const checkBox = document.createElement("input");
     const newLi = document.createElement("li");
     newLi.textContent = `${taskText} - ${selectOption.value}`;
 
@@ -53,6 +53,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "❌";
+    deleteBtn.style.backgroundColor = "white";
+    deleteBtn.style.color = "red";
+    deleteBtn.style.border = "none";
+    deleteBtn.style.padding = "5px 10px";
+    deleteBtn.style.borderRadius = "10px";
+    deleteBtn.style.fontSize = "10px";
+    deleteBtn.style.marginLeft = "10px";
+
     deleteBtn.addEventListener("click", () => {
       taskList.removeChild(newLi);
     });
@@ -69,7 +77,8 @@ document.addEventListener("DOMContentLoaded", () => {
     taskList.innerHTML = "";
   });
 
-  // Delete user input
+  // Delete user input  --> conflict mit clear button function
+
   // deleteButton.addEventListener("click", () => {
   //   userInput.value = "";
   // });
