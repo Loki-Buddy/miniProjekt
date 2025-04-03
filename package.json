@@ -8,8 +8,18 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
+    "cors": "^2.8.5",
+    "date-fns-tz": "^3.2.0",
     "express": "^5.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Loki-Buddy/miniProjekt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Loki-Buddy/miniProjekt/issues"
+  },
+  "homepage": "https://github.com/Loki-Buddy/miniProjekt#readme",
+  "description": ""
 }
