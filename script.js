@@ -1,11 +1,10 @@
-document.addEventListener("DOMContentLoaded", () => {
+// document.addEventListener("DOMContentLoaded", () => {
   const taskList = document.getElementById("taskList");
   const userTaskInput = document.getElementById("userTaskInput");
   const selectOption = document.getElementById("selectOption");
   const addTaskButton = document.getElementById("addTaskButton");
   const deleteButton = document.getElementById("deleteButton");
   const clearButton = document.getElementById("clearButton");
-
   const userListInput = document.getElementById("userListInput");
   const addListButton = document.getElementById("addListButton");
 
@@ -73,4 +72,21 @@ document.addEventListener("DOMContentLoaded", () => {
   // deleteButton.addEventListener("click", () => {
   //   userInput.value = "";
   // });
+//});
+
+// Mit Enter' bestätigen
+let input = document.getElementById("userListInput");
+input.addEventListener("keypress", function(event) {
+ if (event.key === "Enter") {
+   event.preventDefault();
+   document.getElementById("addListButton").click();
+ }
+});
+
+let input2 = document.getElementById("userTaskInput");
+input2.addEventListener("keypress", function(event) {
+ if (event.key === "Enter") {
+   event.preventDefault();
+   document.getElementById("addTaskButton").click();
+ }
 });
