@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const userTaskInput = document.getElementById("userTaskInput");
   const selectOption = document.getElementById("selectOption");
   const addTaskButton = document.getElementById("addTaskButton");
-  const deleteButton = document.getElementById("deleteButton");
+  const deleteListButton = document.getElementById("deleteListButton");
   const clearButton = document.getElementById("clearButton");
 
   const userListInput = document.getElementById("userListInput");
@@ -44,19 +44,51 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Please enter a task!");
       return;
     }
-    const checkBox = document.createElement("userInput");
-    const newLi = document.createElement("li");
-    newLi.textContent = `${taskText} - ${selectOption.value}`;
 
+    fetch("http://localhost:5000/createTask/" + selectOption.value, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ taskName: taskText })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+      });
+
+    const checkBox = document.createElement("input");
+    const newLi = document.createElement("li");
     checkBox.type = "checkbox";
-    checkBox.addEventListener("change", () => {});
+    checkBox.classList.add("checkbox");
+
+    const liText = document.createTextNode(
+      `${taskText}`
+    );
+    /* newLi.textContent = `${taskText} - ${selectOption.value}`; */
+
+
+    /* checkBox.addEventListener("change", () => {
+
+    }); */
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "❌";
     deleteBtn.addEventListener("click", () => {
+      fetch("http://localhost:5000/deleteTask/" + selectOption.value + "/" + taskText, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+        });
       taskList.removeChild(newLi);
     });
-
+    newLi.appendChild(checkBox);
+    newLi.appendChild(liText);
     newLi.appendChild(deleteBtn);
     taskList.appendChild(newLi);
 
@@ -65,12 +97,32 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Clear entire task list
-  clearButton.addEventListener("click", () => {
+  /* clearButton.addEventListener("click", () => {
     taskList.innerHTML = "";
+  }); */
+
+  //Delete List
+  deleteListButton.addEventListener("click", () => {
+    console.log(selectOption.value);
+    fetch("http://localhost:5000/deleteList/" + selectOption.value, {
+      method: "DELETE"
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+      });
   });
 
-  // Delete user input
-  // deleteButton.addEventListener("click", () => {
-  //   userInput.value = "";
-  // });
+  window.onload = function () {
+    fetch("http://localhost:5000/listlog")
+      .then(res => res.json())
+      .then(data => {
+        const selectOption = document.getElementById("selectOption");
+        data.forEach(tdList => {
+          const optionElement = document.createElement("option");
+          optionElement.textContent = tdList.listName;
+          selectOption.appendChild(optionElement);
+        });
+      });
+  };
 });

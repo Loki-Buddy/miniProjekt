@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "listName": "Einkaufen",
+    "dateOfCreate": "2025-04-03T13:03:01Z",
+    "dateOfUpdate": "2025-04-03T14:26:29Z",
+    "tasks": [
+      {
+        "taskName": "Gruke",
+        "checked": false
+      }
+    ]
+  }
+]

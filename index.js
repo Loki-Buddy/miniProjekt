@@ -10,7 +10,10 @@ const formattedDate = format(zonedDate, "yyyy-MM-dd'T'HH:mm:ss'Z'", timeZone);
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({              // CORS (Cross origin resource sharing) aktivieren 
+  origin: "http://127.0.0.1:5501", // Erlaubt nur Anfragen von dieser URL
+  methods: ["GET", "POST", "PUT", "DELETE"], // Erlaubt nur diese Methoden
+}))
 
 /**
  * Liest die Datei "listlog.json" und gibt den Inhalt als
@@ -126,7 +129,9 @@ app.post("/createTask/:listName", (req, res) => {
         return res.json(foundedList);
     }
 
-    res.status(400).send("Dieser Task existiert bereits!");
+    if (foundedTask) {
+        return res.status(400).send("Aufgabe existiert bereits!");
+    }
 });
 
 app.put("/updateList/:listName", (req, res) => {
