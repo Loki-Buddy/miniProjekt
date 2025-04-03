@@ -1,11 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MiniProjekt</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
+
 <body>
-    
+
+    <h2>Manage my task lists</h2>
+
+
+    <input type="text" id="userListInput" placeholder="Enter next list">
+    <button id="addListButton">create list</button>
+
+    <br>
+
+    <!-- Dropdown for selecting option -->
+
+    <select id="selectOption" placeholder="select option">
+        <!-- die Liste muss dynamisch aufgebaut werden-> onload existierenden Listen abrufen   -->
+        <option value="">first list</option>
+        <option value="">second list</option>
+        <option value="">third list </option>
+        <option value="">fourth list </option>
+    </select>
+    <button id="clearButton">delete list </button>
+
+
+    <br><br>
+    <h3>Tasks:</h3>
+
+
+    <input type="text" id="userTaskInput" placeholder="Enter next task">
+    <button id="addTaskButton">create task</button>
+
+
+    <!--<select id="selectOption" placeholder="select an option">
+        <option value="Shopping">Shopping 🛒</option>
+        <option value="Gym">Gym 🏋️‍♂️</option>
+        <option value="Work">Work 💼</option>
+        <option value="Family">Family 👨‍👩‍👧‍👦</option>
+        <option value="Home">Home 🏡</option>
+        <option value="Birthdays">Birthdays 🎂</option>
+        <option value="Venture">Venture 🚀</option>
+        <option value="Tools">Tools 🔧</option>
+        <option value="Auto">Auto 🚗</option>
+        <option value="Bills">Bills 💰</option>
+    </select>-->
+    <br>
+    <br>
+
+
+
+    <!--<button id="deleteButton">delete input </button>-->
+
+
+
+    <ul id="taskList">List of tasks:
+
+    </ul>
 </body>
+
 </html>
