@@ -53,6 +53,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "❌";
+    deleteBtn.style.backgroundColor = "white";
+    deleteBtn.style.color = "red";
+    deleteBtn.style.border = "none";
+    deleteBtn.style.padding = "5px 10px";
+    deleteBtn.style.borderRadius = "5px";
+    deleteBtn.style.fontSize = "10px";
+    deleteBtn.style.marginLeft = "10px";
+
     deleteBtn.addEventListener("click", () => {
       taskList.removeChild(newLi);
     });
