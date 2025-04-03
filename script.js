@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const selectOption = document.getElementById("selectOption");
   const addTaskButton = document.getElementById("addTaskButton");
   const deleteListButton = document.getElementById("deleteListButton");
-  const clearButton = document.getElementById("clearButton");
+  /* const clearButton = document.getElementById("clearButton"); */
 
   const userListInput = document.getElementById("userListInput");
   const addListButton = document.getElementById("addListButton");
@@ -36,6 +36,41 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error:", error);
     }
   });
+
+  selectOption.addEventListener("change", async function () {
+    taskList.innerHTML = "";
+    const response = await fetch("http://localhost:5000/listlog");
+    const data = await response.json();
+    const selectedList = data.find(tdList => tdList.listName.toLowerCase() === selectOption.value.toLowerCase());
+    selectedList.tasks.forEach(task => {
+      const checkBox = document.createElement("input");
+      const newLi = document.createElement("li");
+      checkBox.type = "checkbox";
+      checkBox.classList.add("checkbox");
+
+      const liText = document.createTextNode(
+        `${task.taskName}`
+      );
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "❌"; // Unicode for a cross symbol
+      deleteBtn.addEventListener("click", () => {
+        fetch("http://localhost:5000/deleteTask/" + selectOption.value + "/" + task.taskName, {
+          method: "DELETE",
+        })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data);
+          });
+        newLi.remove();
+      });
+
+      newLi.appendChild(checkBox);
+      newLi.appendChild(liText);
+      newLi.appendChild(deleteBtn);
+      taskList.appendChild(newLi);
+    });
+  })
 
   // Function to add a task
   addTaskButton.addEventListener("click", async function () {
