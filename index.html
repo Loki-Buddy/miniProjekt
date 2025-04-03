@@ -9,9 +9,13 @@
     <script src="script.js" defer></script>
 </head>
 
-<body>
+<body id="bodyId">
 
     <h2>Manage my task lists</h2>
+    <header>
+        <img src="./light.png" alt="light mode" width="30px" id="modeLight">
+        <img src="./dark.png" alt="dark mode" width="30px" id="modeDark">
+    </header>
 
 
     <input type="text" id="userListInput" placeholder="Enter next list">
@@ -21,14 +25,15 @@
 
     <!-- Dropdown for selecting option -->
 
-    <select id="selectOption" placeholder="select option">
+    <select id="selectOption">
+        <option value="" disabled selected>Select a list</option>
         <!-- die Liste muss dynamisch aufgebaut werden-> onload existierenden Listen abrufen   -->
-        <option value="">first list</option>
+        <!-- <option value="">first list</option>
         <option value="">second list</option>
         <option value="">third list </option>
-        <option value="">fourth list </option>
+        <option value="">fourth list </option> -->
     </select>
-    <button id="clearButton">delete list </button>
+    <button id="deleteListButton">delete list </button>
 
 
     <br><br>
