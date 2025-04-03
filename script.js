@@ -44,12 +44,18 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Please enter a task!");
       return;
     }
+    //const checkBox = document.createElement("userInput");
+    //const newLi = document.createElement("li");
+    //newLi.textContent = `${taskText} - ${selectOption.value}`;
+
+    //checkBox.type = "checkbox";
+    // checkBox.addEventListener("change", () => {});
+    selectedList.tasks.forEach(task => {
     const checkBox = document.createElement("input");
     const newLi = document.createElement("li");
-    newLi.textContent = `${taskText} - ${selectOption.value}`;
-
     checkBox.type = "checkbox";
-    checkBox.addEventListener("change", () => {});
+    checkBox.classList.add("checkbox");
+    const liText = document.createTextNode(`${task.taskName}`);
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "❌";
@@ -81,5 +87,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // deleteButton.addEventListener("click", () => {
   //   userInput.value = "";
-  // });
-});
+  // }
+  

@@ -55,3 +55,9 @@ button {
     padding: 10px;
     width: 80%;
 }
+
+.checkbox {
+    width: 12px;
+    height: 12px;
+    margin-right: 10px;
+}
