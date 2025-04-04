@@ -72,6 +72,14 @@ selectOption.addEventListener("change", async function () {
     const liText = document.createTextNode(`${task.taskName}`);
 
     const deleteBtn = document.createElement("button");
+    deleteBtn.style.backgroundColor = "white";
+    deleteBtn.style.color = "red";
+    deleteBtn.style.border = "solid,black,0.5px";
+    deleteBtn.style.padding = "10px 5px";
+    deleteBtn.style.borderRadius = "5px";
+    deleteBtn.style.fontSize = "10px";
+    deleteBtn.style.marginLeft = "10px";
+
     deleteBtn.textContent = "❌"; // Unicode for a cross symbol
     deleteBtn.addEventListener("click", () => {
       fetch(
