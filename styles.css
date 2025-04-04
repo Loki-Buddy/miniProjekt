@@ -2,6 +2,10 @@
     visibility: hidden;
 }
 
+#selectOption:first-child option:disabled {
+    color: gray; /* Ändert die Schriftfarbe zu Grau */
+}
+
 li {
     list-style-type: none;
 }

@@ -11,19 +11,7 @@ const modeLight = document.getElementById("modeLight");
 const modeDark = document.getElementById("modeDark")
 const bodyIdJs = document.getElementById("bodyId");
 
-modeLight.addEventListener("click", () => {
-  bodyIdJs.style.backgroundColor = "white";
-  bodyIdJs.style.color = "black";
-  modeLight.style.visibility = "hidden";
-  modeDark.style.visibility = "visible";
-})
 
-modeDark.addEventListener("click", () => {
-  bodyIdJs.style.backgroundColor = "black";
-  bodyIdJs.style.color = "white";
-  modeLight.style.visibility = "visible";
-  modeDark.style.visibility = "hidden";
-})
 
 // Function to add a new list
 addListButton.addEventListener("click", async function () {
@@ -46,11 +34,10 @@ addListButton.addEventListener("click", async function () {
     if (!response.ok) {
       throw new Error("Failed to create list");
     }
-    const result = response.json();
-    console.log("List created:", result);
+    const result = await response.json();
+    //console.log("List created:", result);
 
     const newOption = document.createElement("option");
-    console.log(result.listName);
     newOption.value = result.listName; // Set the value of the option to the list name
     newOption.textContent = result.listName; // Set the text of the option to the list name
     selectOption.appendChild(newOption); // Append the new option to the select element
@@ -63,8 +50,9 @@ addListButton.addEventListener("click", async function () {
 
 });
 
+// Function to fetch and display tasks when a list is selected
 selectOption.addEventListener("change", async function () {
-  taskList.innerHTML = "";
+  //taskList.innerHTML = "";
   const response = await fetch("http://localhost:5000/listlog");
   const data = await response.json();
   const selectedList = data.find(tdList => tdList.listName.toLowerCase() === selectOption.value.toLowerCase());
@@ -143,8 +131,6 @@ addTaskButton.addEventListener("click", async function () {
   const liText = document.createTextNode(
     `${taskText}`
   );
-  /* newLi.textContent = `${taskText} - ${selectOption.value}`; */
-
 
   /* checkBox.addEventListener("change", () => {
     if(checkBox.checked){
@@ -191,7 +177,6 @@ addTaskButton.addEventListener("click", async function () {
 
 //Delete List
 deleteListButton.addEventListener("click", () => {
-  console.log(selectOption.value);
   fetch("http://localhost:5000/deleteList/" + selectOption.value, {
     method: "DELETE"
   })
@@ -201,31 +186,46 @@ deleteListButton.addEventListener("click", () => {
     });
   selectOption.remove(selectOption.selectedIndex);
   taskList.innerHTML = "";
-});
-
-// Delete user input  --> conflict mit clear button function
-
-// deleteButton.addEventListener("click", () => {
-//   userInput.value = "";
-// });
-
-
-// Mit Enter' bestätigen
-let input = document.getElementById("userListInput");
-input.addEventListener("keypress", async function (event) {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    document.getElementById("addListButton").click();
+  
+  //Zeigt den default wert im Select an wenn keine Listen mehr vorhanden sind
+  if(selectOption.length - 1 == 0){
+    selectOption.value = "default";
   }
+  
 });
 
-let input2 = document.getElementById("userTaskInput");
-input2.addEventListener("keypress", async function (event) {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    document.getElementById("addTaskButton").click();
+//LightMode
+modeLight.addEventListener("click", () => {
+  bodyIdJs.style.backgroundColor = "white";
+  bodyIdJs.style.color = "black";
+  modeLight.style.visibility = "hidden";
+  modeDark.style.visibility = "visible";
+})
+//DarkMode
+modeDark.addEventListener("click", () => {
+  bodyIdJs.style.backgroundColor = "black";
+  bodyIdJs.style.color = "white";
+  modeLight.style.visibility = "visible";
+  modeDark.style.visibility = "hidden";
+})
+
+window.onload = function () {
+  fetch("http://localhost:5000/listlog")
+    .then(res => res.json())
+    .then(data => {
+      data.forEach(tdList => {
+        const newOption = document.createElement("option");
+        newOption.value = tdList.listName; // Set the value of the option to the list name
+        newOption.textContent = tdList.listName; // Set the text of the option to the list name
+        selectOption.appendChild(newOption); // Append the new option to the select element
+      });
+    });
+
+  if (selectOption.value == "default") {
+    deleteListButton.disabled = true;
   }
-});
+}
+
 
 function redboxlist() {
   const list = userListInput.value;
@@ -249,19 +249,19 @@ function redboxtask() {
   }
 }
 
-window.onload = function () {
-  fetch("http://localhost:5000/listlog")
-    .then(res => res.json())
-    .then(data => {
-      data.forEach(tdList => {
-        const newOption = document.createElement("option");
-        newOption.value = tdList.listName; // Set the value of the option to the list name
-        newOption.textContent = tdList.listName; // Set the text of the option to the list name
-        selectOption.appendChild(newOption); // Append the new option to the select element
-      });
-    });
-
-  if (selectOption.value == "default") {
-    deleteListButton.disabled = true;
+// Mit Enter' bestätigen
+let input = document.getElementById("userListInput");
+input.addEventListener("keypress", async function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("addListButton").click();
   }
-}
+});
+
+let input2 = document.getElementById("userTaskInput");
+input2.addEventListener("keypress", async function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("addTaskButton").click();
+  }
+});
