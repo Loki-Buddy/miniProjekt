@@ -2,8 +2,17 @@
     visibility: hidden;
 }
 
+#selectOption:first-child option:checked {
+    color: gray; /* Ändert die Schriftfarbe zu Grau */
+}
+
 #selectOption:first-child option:disabled {
     color: gray; /* Ändert die Schriftfarbe zu Grau */
+}
+
+select {
+    border-radius: 8px;
+    width: 80%;
 }
 
 li {
@@ -28,13 +37,13 @@ h2 {
 }
 
 
-input {
+input{
     padding: 10px;
     border-radius: 8px;
-    width: 80%;
+    width: 76.3%;
 }
 
-button {
+.orangeButtons {
     font-size: 18px;
     padding: 10px;
     /* color: orange; */
@@ -42,7 +51,6 @@ button {
     color: white;
     font-weight: 700;
     border-radius: 8px;
-
 
     &:hover {
         color: orange;
@@ -67,4 +75,38 @@ button {
     width: 12px;
     height: 12px;
     margin-right: 10px;
+}
+
+/* Style für die Listenelemente */
+#taskList li {
+    display: flex; /* Flexbox aktivieren */
+    align-items: center; /* Vertikale Ausrichtung */
+    justify-content: space-between; /* Platz zwischen den Elementen */
+    padding: 5px 0; /* Abstand zwischen den Listenelementen */
+}
+
+/* Style für die Checkbox */
+#taskList li .checkbox {
+    flex-shrink: 0; /* Verhindert, dass die Checkbox skaliert */
+    margin-right: 10px; /* Abstand zwischen Checkbox und Text */
+}
+
+/* Style für den Text */
+#taskList li .taskText {
+    flex-grow: 1; /* Text nimmt den verfügbaren Platz ein */
+    margin-right: 10px; /* Abstand zwischen Text und Button */
+    text-align: left; /* Text linksbündig */
+}
+
+/* Style für den Button */
+#taskList li .deleteButton {
+    flex-shrink: 0; /* Verhindert, dass der Button skaliert */
+    margin-left: auto; /* Abstand zwischen Text und Button */
+    margin-right: 1000px;
+    padding: 5px 10px;
+    background-color: white;
+    color: red;
+    border: none;
+    border-radius: 5px;
+    font-size: 10px;
 }

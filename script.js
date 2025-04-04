@@ -97,7 +97,7 @@ selectOption.addEventListener("change", async function () {
 
     newLi.appendChild(checkBox);
     newLi.appendChild(liText);
-    newLi.appendChild(deleteBtn);
+    //newLi.appendChild(deleteBtn);
     taskList.appendChild(newLi);
   });
 })

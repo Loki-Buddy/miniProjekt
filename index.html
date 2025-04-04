@@ -17,7 +17,7 @@
         <img src="./dark.png" alt="dark mode" width="30px" id="modeDark">
     </header>
     <input type="text" id="userListInput" placeholder="New List ...">
-    <button id="addListButton">create list</button>
+    <button id="addListButton" class="orangeButtons">create list</button>
     <br>
     <select id="selectOption">
         <option value="default" disabled selected>Select List ...</option>
@@ -27,17 +27,21 @@
         
         -->
     </select>
-    <button id="deleteListButton">delete list </button>
+    <button id="deleteListButton" class="orangeButtons">delete list </button>
     <br>
     <br>
     <h3>Tasks:</h3>
     <input type="text" id="userTaskInput" placeholder="New Task ...">
-    <button id="addTaskButton">create task</button>
+    <button id="addTaskButton" class="orangeButtons">create task</button>
     <br>
     <br>
     <h3></h3>
     <ul id="taskList">
-
+        <li>
+            <input type="checkbox" class="checkbox">
+            <span class="taskText">Task Name</span>
+            <button class="deleteButton">❌</button>
+        </li>
     </ul>
 </body>
 
