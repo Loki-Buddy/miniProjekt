@@ -134,6 +134,7 @@ app.post("/createTask/:listName", (req, res) => {
     }
 });
 
+// Den Namen einer Liste Verändern
 app.put("/updateList/:listName", (req, res) => {
     const listlog = readFile();
     const listName = req.params.listName;
@@ -145,6 +146,7 @@ app.put("/updateList/:listName", (req, res) => {
     res.json(foundedList);
 });
 
+// Den Namen einer Aufgabe Verändern
 app.put("/updateTask/:listName/:taskName", (req, res) => {
     const listlog = readFile();
     const listName = req.params.listName;
@@ -158,6 +160,7 @@ app.put("/updateTask/:listName/:taskName", (req, res) => {
     res.json(foundedList);
 });
 
+// Liste löschen
 app.delete("/deleteList/:listName", (req, res) => {
     const listlog = readFile();
     const listName = req.params.listName;
@@ -166,6 +169,7 @@ app.delete("/deleteList/:listName", (req, res) => {
     res.json(filteredList);
 });
 
+// Task löschen
 app.delete("/deleteTask/:listName/:taskName", (req, res) => {
     const listlog = readFile();
     const listName = req.params.listName;
@@ -180,6 +184,12 @@ app.delete("/deleteTask/:listName/:taskName", (req, res) => {
 
 });
 
+// Port
 app.listen(5000, () => {
     console.log("Server läuft auf Port 5000");
 });
+
+
+// =========================================================================================
+// Made By Lokii
+// =========================================================================================
