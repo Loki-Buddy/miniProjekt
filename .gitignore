@@ -1,1 +1,4 @@
 node_modules/
+listlog.json
+package-lock.json
+.vscode/
