@@ -76,7 +76,7 @@ selectOption.addEventListener("change", async function () {
     deleteBtn.style.border = "solid,black,0.5px";
     deleteBtn.style.padding = "10px 5px";
     deleteBtn.style.borderRadius = "5px";
-    deleteBtn.style.fontSize = "10px";
+    deleteBtn.style.fontSize = "12px";
     deleteBtn.style.marginLeft = "10px";
 
     deleteBtn.textContent = "❌"; // Unicode for a cross symbol
