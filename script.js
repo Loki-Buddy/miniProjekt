@@ -143,7 +143,7 @@ addTaskButton.addEventListener("click", async function () {
   deleteBtn.style.width = "30px";
   deleteBtn.style.height = "30px";
   deleteBtn.style.color = "red";
-  (deleteBtn.style.border = "solid,black"), "1px";
+  deleteBtn.style.border = "solid,black,0.1px";
   deleteBtn.style.padding = "10px 10px";
   deleteBtn.style.borderRadius = "5px";
   deleteBtn.style.fontSize = "8px";
