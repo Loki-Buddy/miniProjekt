@@ -50,6 +50,7 @@ addListButton.addEventListener("click", async function () {
     console.log("List created:", result);
 
     const newOption = document.createElement("option");
+    console.log(result.listName);
     newOption.value = result.listName; // Set the value of the option to the list name
     newOption.textContent = result.listName; // Set the text of the option to the list name
     selectOption.appendChild(newOption); // Append the new option to the select element
