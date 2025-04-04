@@ -19,7 +19,7 @@
   })
 
   modeDark.addEventListener("click", () => {
-    bodyIdJs.style.backgroundColor = "black";
+    bodyIdJs.style.backgroundColor = "#1C1C1C";
     bodyIdJs.style.color = "white";
     modeLight.style.visibility = "visible";
     modeDark.style.visibility = "hidden";
