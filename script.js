@@ -98,6 +98,15 @@ document.addEventListener("DOMContentLoaded", () => {
         newLi.remove();
       });
 
+      deleteBtn.textContent = "❌";
+      deleteBtn.style.backgroundColor = "white";
+      deleteBtn.style.color = "red";
+      deleteBtn.style.border = "none";
+      deleteBtn.style.padding = "5px 10px";
+      deleteBtn.style.borderRadius = "5px";
+      deleteBtn.style.fontSize = "10px";
+      deleteBtn.style.marginLeft = "10px";
+
       newLi.appendChild(checkBox);
       newLi.appendChild(liText);
       newLi.appendChild(deleteBtn);
@@ -218,10 +227,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-function redboxlist() {
-  const list = userListInput.value;
-  let isValid = true;
-  if (!list) {
+  function redboxlist() {
+    const list = userListInput.value;
+    let isValid = true;
+    if (!list) {
       userListInput.style.border = "4px solid red"
       isValid = false;
     } else {
@@ -229,10 +238,10 @@ function redboxlist() {
     }
   }
 
-function redboxtask() {
-  const task = userTaskInput.value;
-  let isValid = true;
-  if (!task) {
+  function redboxtask() {
+    const task = userTaskInput.value;
+    let isValid = true;
+    if (!task) {
       userTaskInput.style.border = "4px solid red"
       isValid = false;
     } else {
