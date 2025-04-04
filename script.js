@@ -1,4 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
   const taskList = document.getElementById("taskList");
   const userTaskInput = document.getElementById("userTaskInput");
   const selectOption = document.getElementById("selectOption");
@@ -265,4 +264,3 @@ document.addEventListener("DOMContentLoaded", () => {
       deleteListButton.disabled = true;
     }
   }
-});
