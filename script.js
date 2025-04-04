@@ -145,6 +145,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "❌";
+    deleteBtn.style.backgroundColor = "white";
+    deleteBtn.style.color = "red";
+    deleteBtn.style.border = "none";
+    deleteBtn.style.padding = "5px 10px";
+    deleteBtn.style.borderRadius = "5px";
+    deleteBtn.style.fontSize = "10px";
+    deleteBtn.style.marginLeft = "10px";
+
     deleteBtn.addEventListener("click", () => {
       fetch("http://localhost:5000/deleteTask/" + selectOption.value + "/" + taskText, {
         method: "DELETE",
@@ -186,7 +194,8 @@ document.addEventListener("DOMContentLoaded", () => {
     taskList.innerHTML = "";
   });
 
-  // Delete user input
+  // Delete user input  --> conflict mit clear button function
+
   // deleteButton.addEventListener("click", () => {
   //   userInput.value = "";
   // });
@@ -209,22 +218,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  function redboxlist() {
-    const list = userListInput.value;
-    let isValid = true;
-    if (!list) {
-      userListInput.style.border = "2px solid red"
+function redboxlist() {
+  const list = userListInput.value;
+  let isValid = true;
+  if (!list) {
+      userListInput.style.border = "4px solid red"
       isValid = false;
     } else {
       userListInput.style.border = ""
     }
   }
 
-  function redboxtask() {
-    const task = userTaskInput.value;
-    let isValid = true;
-    if (!task) {
-      userTaskInput.style.border = "2px solid red"
+function redboxtask() {
+  const task = userTaskInput.value;
+  let isValid = true;
+  if (!task) {
+      userTaskInput.style.border = "4px solid red"
       isValid = false;
     } else {
       userTaskInput.style.border = ""
