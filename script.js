@@ -205,7 +205,7 @@ function redboxlist() {
   const list = userListInput.value;
   let isValid = true;
   if (!list) {
-      userListInput.style.border = "2px solid red"
+      userListInput.style.border = "4px solid red"
       isValid = false;
   } else {
       userListInput.style.border = ""
@@ -215,7 +215,7 @@ function redboxtask() {
   const task = userTaskInput.value;
   let isValid = true;
   if (!task) {
-      userTaskInput.style.border = "2px solid red"
+      userTaskInput.style.border = "4px solid red"
       isValid = false;
   } else {
       userTaskInput.style.border = ""
