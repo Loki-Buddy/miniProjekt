@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "listName": "Test",
+    "dateOfCreate": "2025-04-04T11:26:53Z",
+    "dateOfUpdate": "2025-04-04T11:26:53Z",
+    "tasks": []
+  },
+  {
+    "listName": "Test1",
+    "dateOfCreate": "2025-04-04T11:26:53Z",
+    "dateOfUpdate": "2025-04-04T11:26:53Z",
+    "tasks": []
+  },
+  {
+    "listName": "Einkaufen",
+    "dateOfCreate": "2025-04-04T11:26:53Z",
+    "dateOfUpdate": "2025-04-04T11:39:59Z",
+    "tasks": []
+  }
+]
