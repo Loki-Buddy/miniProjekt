@@ -1,17 +1,15 @@
-const taskList = document.getElementById("taskList");
 const userTaskInput = document.getElementById("userTaskInput");
 const selectOption = document.getElementById("selectOption");
 const addTaskButton = document.getElementById("addTaskButton");
 const deleteListButton = document.getElementById("deleteListButton");
-/* const clearButton = document.getElementById("clearButton"); */
-
 const userListInput = document.getElementById("userListInput");
 const addListButton = document.getElementById("addListButton");
 const modeLight = document.getElementById("modeLight");
 const modeDark = document.getElementById("modeDark")
 const bodyIdJs = document.getElementById("bodyId");
 
-
+// Limit the length of the input
+userTaskInput.setAttribute("maxlength", "40");
 
 // Function to add a new list
 addListButton.addEventListener("click", async function () {
@@ -52,7 +50,13 @@ addListButton.addEventListener("click", async function () {
 
 // Function to fetch and display tasks when a list is selected
 selectOption.addEventListener("change", async function () {
-  //taskList.innerHTML = "";
+  const taskdivContainer = document.createElement("div");
+  const taskList = document.createElement("ul");
+  taskdivContainer.appendChild(taskList);
+  taskList.id = "taskList";
+  bodyIdJs.appendChild(taskdivContainer);
+  taskList.innerHTML = "";
+
   const response = await fetch("http://localhost:5000/listlog");
   const data = await response.json();
   const selectedList = data.find(tdList => tdList.listName.toLowerCase() === selectOption.value.toLowerCase());
@@ -69,12 +73,20 @@ selectOption.addEventListener("change", async function () {
     checkBox.type = "checkbox";
     checkBox.classList.add("checkbox");
 
-    const liText = document.createTextNode(
-      `${task.taskName}`
-    );
+    const liText = document.createElement("span");
+    liText.classList.add("taskText");
+    liText.textContent = task.taskName;
+
+    const editBtn = document.createElement("button");
+    editBtn.classList.add("editButton");
+    editBtn.textContent = "✏️";
 
     const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "❌"; // Unicode for a cross symbol
+    deleteBtn.classList.add("deleteButton");
+    deleteBtn.textContent = "❌";
+
+    
+
     deleteBtn.addEventListener("click", () => {
       fetch("http://localhost:5000/deleteTask/" + selectOption.value + "/" + task.taskName, {
         method: "DELETE",
@@ -86,18 +98,10 @@ selectOption.addEventListener("change", async function () {
       newLi.remove();
     });
 
-    deleteBtn.textContent = "❌";
-    deleteBtn.style.backgroundColor = "white";
-    deleteBtn.style.color = "red";
-    deleteBtn.style.border = "none";
-    deleteBtn.style.padding = "5px 10px";
-    deleteBtn.style.borderRadius = "5px";
-    deleteBtn.style.fontSize = "10px";
-    deleteBtn.style.marginLeft = "10px";
-
     newLi.appendChild(checkBox);
     newLi.appendChild(liText);
-    //newLi.appendChild(deleteBtn);
+    newLi.appendChild(editBtn);
+    newLi.appendChild(deleteBtn);
     taskList.appendChild(newLi);
   });
 })
@@ -128,25 +132,28 @@ addTaskButton.addEventListener("click", async function () {
   checkBox.type = "checkbox";
   checkBox.classList.add("checkbox");
 
-  const liText = document.createTextNode(
-    `${taskText}`
-  );
+  const liText = document.createElement("span");
+  liText.classList.add("taskText");
+  liText.textContent = taskText;
 
-  /* checkBox.addEventListener("change", () => {
-    if(checkBox.checked){
+  checkBox.addEventListener("change", () => {
+    if (checkBox.checked) {
       taskText.style.textDecoration = "line-through";
+    } else {
+      taskText.style.textDecoration = "none";
     }
-  }); */
+  });
 
   const deleteBtn = document.createElement("button");
+  deleteBtn.classList.add("deleteButton");
   deleteBtn.textContent = "❌";
-  deleteBtn.style.backgroundColor = "white";
+  /* deleteBtn.style.backgroundColor = "white";
   deleteBtn.style.color = "red";
   deleteBtn.style.border = "none";
   deleteBtn.style.padding = "5px 10px";
   deleteBtn.style.borderRadius = "5px";
   deleteBtn.style.fontSize = "10px";
-  deleteBtn.style.marginLeft = "10px";
+  deleteBtn.style.marginLeft = "10px"; */
 
   deleteBtn.addEventListener("click", () => {
     fetch("http://localhost:5000/deleteTask/" + selectOption.value + "/" + taskText, {
@@ -161,6 +168,7 @@ addTaskButton.addEventListener("click", async function () {
       });
     taskList.removeChild(newLi);
   });
+
   newLi.appendChild(checkBox);
   newLi.appendChild(liText);
   newLi.appendChild(deleteBtn);
@@ -186,12 +194,13 @@ deleteListButton.addEventListener("click", () => {
     });
   selectOption.remove(selectOption.selectedIndex);
   taskList.innerHTML = "";
-  
+
   //Zeigt den default wert im Select an wenn keine Listen mehr vorhanden sind
-  if(selectOption.length - 1 == 0){
+  if (selectOption.length - 1 == 0) {
     selectOption.value = "default";
+    deleteListButton.disabled = true;
   }
-  
+
 });
 
 //LightMode
@@ -203,7 +212,7 @@ modeLight.addEventListener("click", () => {
 })
 //DarkMode
 modeDark.addEventListener("click", () => {
-  bodyIdJs.style.backgroundColor = "black";
+  bodyIdJs.style.backgroundColor = "rgb(28, 28, 28)";
   bodyIdJs.style.color = "white";
   modeLight.style.visibility = "visible";
   modeDark.style.visibility = "hidden";

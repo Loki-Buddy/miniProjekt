@@ -10,39 +10,44 @@
 </head>
 
 <body id="bodyId">
-
-    <h2>Manage my task lists</h2>
+    <h1>To-Do-Manager MasterWork 1.0</h1>
     <header>
         <img src="./light.png" alt="light mode" width="30px" id="modeLight">
         <img src="./dark.png" alt="dark mode" width="30px" id="modeDark">
     </header>
-    <input type="text" id="userListInput" placeholder="New List ...">
-    <button id="addListButton" class="orangeButtons">create list</button>
-    <br>
-    <select id="selectOption">
-        <option value="default" disabled selected>Select List ...</option>
-        <!-- 
-        
-                javascript regelt mittels createElement
-        
-        -->
-    </select>
-    <button id="deleteListButton" class="orangeButtons">delete list </button>
-    <br>
-    <br>
-    <h3>Tasks:</h3>
-    <input type="text" id="userTaskInput" placeholder="New Task ...">
-    <button id="addTaskButton" class="orangeButtons">create task</button>
-    <br>
-    <br>
-    <h3></h3>
-    <ul id="taskList">
-        <li>
-            <input type="checkbox" class="checkbox">
-            <span class="taskText">Task Name</span>
-            <button class="deleteButton">❌</button>
-        </li>
-    </ul>
+    <div>
+        <input type="text" id="userListInput" placeholder="New List ...">
+        <button id="addListButton" class="orangeButtons">create list</button>
+    </div>
+    <div>
+        <select id="selectOption">
+            <option value="default" disabled selected>Select List ...</option>
+            <!-- 
+            
+                    javascript regelt mittels createElement
+            
+            -->
+        </select>
+        <button id="deleteListButton" class="orangeButtons">delete list </button>
+    </div>
+    <div>
+        <input type="text" id="userTaskInput" placeholder="New Task ...">
+        <button id="addTaskButton" class="orangeButtons">create task</button>
+    </div>
+    <!--<div>
+        <ul id="taskList">
+             
+            
+                    javascript regelt mittels createElement
+            
+            
+            <li>
+                <input type="checkbox" class="checkbox">
+                <span class="taskText">Task Name</span>
+                <button class="deleteButton">❌</button>
+            </li>
+        </ul>
+    </div>-->
 </body>
 
 </html>

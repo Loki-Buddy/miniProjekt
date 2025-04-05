@@ -2,17 +2,29 @@
     visibility: hidden;
 }
 
-#selectOption:first-child option:checked {
-    color: gray; /* Ändert die Schriftfarbe zu Grau */
+header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    z-index: 1000;
 }
 
-#selectOption:first-child option:disabled {
-    color: gray; /* Ändert die Schriftfarbe zu Grau */
-}
-
-select {
+div {
+    width: 470px;
+    height: 100px;
+    border: 2px solid rgba(0, 225, 255, 0.315);
     border-radius: 8px;
-    width: 80%;
+    box-shadow: 0px 0px 10px rgba(0, 225, 255, 0.315);
+    padding: 10px;
+    margin-bottom: 25px;
+}
+
+ul {
+    padding: 0;
 }
 
 li {
@@ -20,55 +32,51 @@ li {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: top;
+    min-height: 100vh;
+    margin: 0;
     color: white;
     background-color: rgb(28, 28, 28);
-    /*display: grid;
-    flex-direction: column;*/
-    padding-left: 20%;
-    padding-right: 20%;
+    margin-top: 25px;
 }
 
-body * {
-    margin: 5px;
-}
-
-h2 {
+h1 {
+    margin-top: 0px;
     color: orange;
+    text-decoration: overline underline;
+    text-decoration-color: rgba(0, 225, 255, 0.315);
 }
 
-
-input{
+input {
+    display: block;
     padding: 10px;
     border-radius: 8px;
-    width: 76.3%;
+    width: 400px;
 }
 
 .orangeButtons {
     font-size: 18px;
     padding: 10px;
-    /* color: orange; */
     background-color: orange;
     color: white;
     font-weight: 700;
     border-radius: 8px;
-
-    &:hover {
-        color: orange;
-        background-color: white;
-    }
+    margin-bottom: 15px;
 }
 
-/* Dropdown Content (Hidden by Default) */
+.orangeButtons:hover {
+    color: orange;
+    background-color: white;
+}
+
 #selectOption {
-    /*
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    */
+    display: block;
+    border-radius: 8px;
     padding: 10px;
-    width: 80%;
+    width: 400px;
 }
 
 .checkbox {
@@ -77,36 +85,44 @@ input{
     margin-right: 10px;
 }
 
-/* Style für die Listenelemente */
 #taskList li {
-    display: flex; /* Flexbox aktivieren */
-    align-items: center; /* Vertikale Ausrichtung */
-    justify-content: space-between; /* Platz zwischen den Elementen */
-    padding: 5px 0; /* Abstand zwischen den Listenelementen */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0px;
 }
 
-/* Style für die Checkbox */
 #taskList li .checkbox {
-    flex-shrink: 0; /* Verhindert, dass die Checkbox skaliert */
-    margin-right: 10px; /* Abstand zwischen Checkbox und Text */
+    flex-shrink: 0;
+    margin-right: 10px;
 }
 
-/* Style für den Text */
 #taskList li .taskText {
-    flex-grow: 1; /* Text nimmt den verfügbaren Platz ein */
-    margin-right: 10px; /* Abstand zwischen Text und Button */
-    text-align: left; /* Text linksbündig */
+    flex-grow: 1;
+    margin-right: 10px;
+    text-align: left;
 }
 
-/* Style für den Button */
 #taskList li .deleteButton {
-    flex-shrink: 0; /* Verhindert, dass der Button skaliert */
-    margin-left: auto; /* Abstand zwischen Text und Button */
-    margin-right: 1000px;
+    flex-shrink: 0;
+    margin-left: auto;
+    margin-right: auto;
     padding: 5px 10px;
-    background-color: white;
+    background-color: rgba(0, 225, 255, 0.315);
     color: red;
-    border: none;
+    border: 2px solid orange;
+    border-radius: 5px;
+    font-size: 10px;
+}
+
+#taskList li .editButton {
+    flex-shrink: 0;
+    margin-left: auto;
+    margin-right: 4px;
+    padding: 5px 10px;
+    background-color: rgba(0, 225, 255, 0.315);
+    color: red;
+    border: 2px solid orange;
     border-radius: 5px;
     font-size: 10px;
 }
