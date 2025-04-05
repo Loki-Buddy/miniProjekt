@@ -11,8 +11,8 @@ const formattedDate = format(zonedDate, "yyyy-MM-dd'T'HH:mm:ss'Z'", timeZone);
 const app = express();
 app.use(express.json());
 app.use(cors({              // CORS (Cross origin resource sharing) aktivieren 
-  origin: "http://127.0.0.1:5501", // Erlaubt nur Anfragen von dieser URL
-  methods: ["GET", "POST", "PUT", "DELETE"], // Erlaubt nur diese Methoden
+    origin: "http://127.0.0.1:5501", // Erlaubt nur Anfragen von dieser URL
+    methods: ["GET", "POST", "PUT", "DELETE"], // Erlaubt nur diese Methoden
 }))
 
 /**
@@ -105,15 +105,15 @@ app.post("/createList", (req, res) => {
 // Einzelenen Task in einer bestimmten Liste ablegen/hinzufügen
 app.post("/createTask/:listName", (req, res) => {
     const listlog = readFile();
-    
+
     const listName = req.params.listName;
     const taskName = req.body.taskName;
 
     const foundedList = listlog.find(tdList => tdList.listName.toLowerCase() === listName.toLowerCase());
     const foundedTask = foundedList.tasks.find(task => task.taskName.toLowerCase() === taskName.toLowerCase());
-    
+
     // Wenn keine Liste existiert
-    if(listlog.length === 0)
+    if (listlog.length === 0)
         return res.status(400).send("Bitte erst eine Liste anlegen!");
 
     if (!foundedTask) {
