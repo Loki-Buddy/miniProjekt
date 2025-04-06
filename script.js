@@ -8,6 +8,7 @@ const addListButton = document.getElementById("addListButton");
 const modeLight = document.getElementById("modeLight");
 const modeDark = document.getElementById("modeDark")
 const bodyIdJs = document.getElementById("bodyId");
+const taskCheckbox = document.getElementById("taskCheckbox");
 
 const taskdivContainer = document.createElement("div");
 const taskList = document.createElement("ul");
@@ -73,8 +74,6 @@ selectOption.addEventListener("change", async function () {
 	const data = await response.json();
 	const selectedList = data.find(tdList => tdList.listName.toLowerCase() === selectOption.value.toLowerCase());
 
-	deleteListButton.disabled = false;
-
 	if (selectedList.tasks.length == 0) {
 		taskList.appendChild(noTasks);
 	}
@@ -82,6 +81,8 @@ selectOption.addEventListener("change", async function () {
 	if (selectOption.value != "default") {
 		userTaskInput.disabled = false;
 		addTaskButton.disabled = false;
+		deleteListButton.disabled = false;
+		editListButton.disabled = false;
 	}
 
 	if (selectOption.value == "default") {
@@ -91,12 +92,19 @@ selectOption.addEventListener("change", async function () {
 	selectedList.tasks.forEach(task => {
 		const checkBox = document.createElement("input");
 		const newLi = document.createElement("li");
+		checkBox.id = "taskCheckbox";
 		checkBox.type = "checkbox";
 		checkBox.classList.add("checkbox");
 
 		const liText = document.createElement("span");
 		liText.classList.add("taskText");
 		liText.textContent = task.taskName;
+
+		if (task.checked == true) {
+			checkBox.checked = true;
+		}else if(task.checked == false){
+			checkBox.checked = false;
+		}
 
 		const editBtn = document.createElement("button");
 		editBtn.classList.add("editButton");
@@ -170,6 +178,59 @@ selectOption.addEventListener("change", async function () {
 	});
 })
 
+//Edit List
+editListButton.addEventListener("click", async function () {
+	let oldListName = selectOption.value;
+	let oldIndex = selectOption.selectedIndex;
+	selectOption.remove(selectOption.selectedIndex);
+	selectOption.replaceWith(updateListInput);
+	updateListInput.value = oldListName;
+	updateListInput.focus();
+
+	updateListInput.addEventListener("keypress", async function (event) {
+		if (event.key === "Enter") {
+			const newListName = updateListInput.value.trim();
+			const newOption = document.createElement("option");
+			updateListInput.replaceWith(selectOption);
+			newOption.value = newListName;
+			newOption.textContent = newListName;
+			selectOption.add(newOption, oldIndex);
+			selectOption.value = newOption.value;
+
+			await fetch("http://localhost:5000/updateList/" + oldListName, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ listName: newListName }),
+			});
+		}
+	});
+
+});
+
+//Delete List
+deleteListButton.addEventListener("click", () => {
+	taskdivContainer.remove();
+	fetch("http://localhost:5000/deleteList/" + selectOption.value, {
+		method: "DELETE"
+	})
+		.then(res => res.json())
+		.then(data => {
+			console.log(data);
+		});
+	selectOption.remove(selectOption.selectedIndex);
+	taskList.innerHTML = "";
+
+
+	//Zeigt den default wert im Select an wenn keine Listen mehr vorhanden sind
+	if (selectOption.length - 1 == 0) {
+		selectOption.value = "default";
+		deleteListButton.disabled = true;
+		editListButton.disabled = true;
+	}
+});
+
 // Function to add a task
 addTaskButton.addEventListener("click", async function () {
 	noTasks.remove();
@@ -190,11 +251,12 @@ addTaskButton.addEventListener("click", async function () {
 	})
 		.then(res => res.json())
 		.then(data => {
-			
+
 		});
 
 	const checkBox = document.createElement("input");
 	const newLi = document.createElement("li");
+	checkBox.id = "taskCheckbox";
 	checkBox.type = "checkbox";
 	checkBox.classList.add("checkbox");
 
@@ -242,7 +304,7 @@ addTaskButton.addEventListener("click", async function () {
 				})
 					.then(res => res.json())
 					.then(data => {
-						
+
 					});
 
 				/* taskList.removeChild(newLi); */
@@ -278,96 +340,9 @@ addTaskButton.addEventListener("click", async function () {
 	newLi.appendChild(deleteBtn);
 	taskList.appendChild(newLi);
 
+
 	// Clear input after adding
 	userTaskInput.value = "";
-});
-
-//Edit List
-editListButton.addEventListener("click", () => {
-	let oldListName = selectOption.value;
-	selectOption.replaceWith(updateListInput);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-});
-
-//Delete List
-deleteListButton.addEventListener("click", () => {
-	taskdivContainer.remove();
-	fetch("http://localhost:5000/deleteList/" + selectOption.value, {
-		method: "DELETE"
-	})
-		.then(res => res.json())
-		.then(data => {
-			console.log(data);
-		});
-	selectOption.remove(selectOption.selectedIndex);
-	taskList.innerHTML = "";
-
-
-	//Zeigt den default wert im Select an wenn keine Listen mehr vorhanden sind
-	if (selectOption.length - 1 == 0) {
-		selectOption.value = "default";
-		deleteListButton.disabled = true;
-	}
 });
 
 //LightMode
@@ -385,6 +360,33 @@ modeDark.addEventListener("click", () => {
 	modeDark.style.visibility = "hidden";
 })
 
+taskList.addEventListener("change", async function (event) {
+	if (event.target.classList.contains("checkbox")) {
+		const taskText = event.target.closest("li").querySelector(".taskText");
+		if (event.target.checked) {
+			/* const listName = selectOption.value;
+			const taskName = taskText.textContent; */
+			taskText.classList.add("completed"); // Text durchstreichen
+			await fetch("http://localhost:5000/updateCheckbox/" + selectOption.value + "/" + taskText.textContent, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ checked: true })
+			});
+		} else {
+			taskText.classList.remove("completed");// Durchstreichen entfernen
+			await fetch("http://localhost:5000/updateCheckbox/" + selectOption.value + "/" + taskText.textContent, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ checked: false })
+			}); 
+		}
+	}
+});
+
 window.onload = function () {
 	fetch("http://localhost:5000/listlog")
 		.then(res => res.json())
@@ -399,6 +401,7 @@ window.onload = function () {
 
 	if (selectOption.value == "default") {
 		deleteListButton.disabled = true;
+		editListButton.disabled = true;
 		userTaskInput.disabled = true;
 		addTaskButton.disabled = true;
 	}

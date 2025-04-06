@@ -114,6 +114,10 @@ button:disabled {
     box-shadow: 0px 0px 10px orange;
 }
 
+#updateTaskInput{
+    margin-right: 5px;
+}
+
 #selectOption {
     display: block;
     border-radius: 8px;
@@ -134,9 +138,14 @@ button:disabled {
     padding: 5px 0px;
 }
 
-#taskList li .checkbox {
+#taskList li .checkbox{
     flex-shrink: 0;
     margin-right: 10px;
+}
+
+.taskText.completed {
+    text-decoration: line-through;
+    color: gray; /* Optional: Ändert die Farbe des durchgestrichenen Textes */
 }
 
 #taskList li .taskText {

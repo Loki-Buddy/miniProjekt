@@ -134,6 +134,19 @@ app.post("/createTask/:listName", (req, res) => {
     }
 });
 
+app.put("/updateCheckbox/:listName/:taskName", (req,res) => {
+    const listlog = readFile();
+    const taskName = req.params.taskName;
+    const { checked } = req.body;
+    const foundedList = listlog.find(tdList => tdList.tasks.find(task => task.taskName.toLowerCase() === taskName.toLowerCase()));
+    const foundedTask = foundedList.tasks.find(task => task.taskName.toLowerCase() === taskName.toLowerCase());
+
+    foundedTask.checked = checked;
+    foundedList.dateOfUpdate = formattedDate;
+    writeFile(listlog);
+    res.json(foundedTask);
+});
+
 // Den Namen einer Liste Verändern
 app.put("/updateList/:listName", (req, res) => {
     const listlog = readFile();
