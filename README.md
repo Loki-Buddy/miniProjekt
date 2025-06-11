@@ -61,4 +61,4 @@ Ein einfaches To-Do-Listen-Projekt mit Listenverwaltung, Aufgabenverwaltung und 
 
 ---
 
-Made by Lokii
+Made by Lokii, Nassima und Domske
